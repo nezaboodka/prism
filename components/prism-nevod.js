@@ -16,16 +16,18 @@ Prism.languages.nevod = {
 		lookbehind: true,
 		inside: {
 			'pattern-name': {
-				pattern: /#?[a-zA-Z0-9\-.]+/,
+				pattern: /^#?[a-zA-Z0-9\-.]+/,
 				alias: 'class-name',
 			},
 			'attributes': {
 				pattern: /\(.*\)/,
 				inside: {
 					'attr-name': /[a-zA-Z0-9\-.]+/,
-					'attr-hidden-mark': /~/,
-					'attr-punctuation': /[,]/,
-					'attr-bracket': /[()]/,
+					'punctuation': /[,()]/,
+					'operator': {
+						pattern: /~/,
+						alias: 'attr-hidden-mark',
+					},
 				},
 			},
 		},
@@ -44,10 +46,14 @@ Prism.languages.nevod = {
 		},
 	},
 	'quantifier': {
-		pattern: /\b\d+(?:\+|-\d+)?\b/,
+		pattern: /\b\d+[+-]?\d*(?=^\w|\W)/,
 		alias: 'number',
 	},
 	'operator': [
+		{
+			pattern: /=/,
+			alias: 'pattern-def',
+		},
 		{
 			pattern: /&/,
 			alias: 'conjunction',
@@ -84,6 +90,6 @@ Prism.languages.nevod = {
 			'colon': /:/,
 		},
 	},
-	'punctuation': /[:;,()=]/,
+	'punctuation': /[:;,()]/,
 	'name': /\S+/
 }
