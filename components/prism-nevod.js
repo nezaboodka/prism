@@ -22,7 +22,10 @@ Prism.languages.nevod = {
 			'attributes': {
 				pattern: /\(.*\)/,
 				inside: {
-					'attr-name': /[a-zA-Z0-9\-.]+/,
+					'attr-name': {
+						pattern: /[a-zA-Z0-9\-.]+/,
+						alias: 'variable',
+					},
 					'punctuation': /[,()]/,
 					'operator': {
 						pattern: /~/,
@@ -38,11 +41,22 @@ Prism.languages.nevod = {
 		lookbehind: true,
 	},
 	'keyword': /@(?:require|namespace|pattern|search|inside|outside|having|where)\b/,
-	'builtin': {
-		pattern: /\b(?:Word|Punct|Symbol|Space|LineBreak|Start|End|Alpha|AlphaNum|Num|NumAlpha|Blank|WordBreak|Any)(?:\(.*\)|\b)/,
+	'standard-pattern': {
+		pattern: /\b(?:Word|Punct|Symbol|Space|LineBreak|Start|End|Alpha|AlphaNum|Num|NumAlpha|Blank|WordBreak|Any)(?:\((?:\w+|\d+|\s+|,|-)*\))?/,
 		inside: {
-			'name': /.+\b/,
-			'params': /\(.*\)/,
+			'standard-pattern-name': {
+				pattern: /^[a-zA-Z0-9\-.]+/,
+				alias: 'builtin',
+			},
+			'quantifier': {
+				pattern: /\b\d+[+-]?\d*(?=^\w|\W)/,
+				alias: 'number',
+			},
+			'standard-pattern-attr': {
+				pattern: /[a-zA-Z0-9\-.]+/,
+				alias: 'builtin',
+			},
+			'punctuation': /[,()]/,
 		},
 	},
 	'quantifier': {
@@ -86,10 +100,13 @@ Prism.languages.nevod = {
 	'attr-capture': {
 		pattern: /[a-zA-Z0-9\-.]+\s*:/,
 		inside: {
-			'attr-name': /[a-zA-Z0-9\-.]+/,
+			'attr-name': {
+				pattern: /[a-zA-Z0-9\-.]+/,
+				alias: 'variable',
+			},
 			'colon': /:/,
 		},
 	},
 	'punctuation': /[:;,()]/,
-	'name': /\S+/
+	'name': /[a-zA-Z0-9\-.]+/
 }
