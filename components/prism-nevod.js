@@ -42,14 +42,14 @@ Prism.languages.nevod = {
 	},
 	'keyword': /@(?:require|namespace|pattern|search|inside|outside|having|where)\b/,
 	'standard-pattern': {
-		pattern: /\b(?:Word|Punct|Symbol|Space|LineBreak|Start|End|Alpha|AlphaNum|Num|NumAlpha|Blank|WordBreak|Any)(?:\((?:\w+|\d+|\s+|,|-)*\))?/,
+		pattern: /\b(?:Word|Punct|Symbol|Space|LineBreak|Start|End|Alpha|AlphaNum|Num|NumAlpha|Blank|WordBreak|Any)(?:\([a-zA-Z0-9\-.,\s+]*\))?/,
 		inside: {
 			'standard-pattern-name': {
 				pattern: /^[a-zA-Z0-9\-.]+/,
 				alias: 'builtin',
 			},
 			'quantifier': {
-				pattern: /\b\d+[+-]?\d*(?=^\w|\W)/,
+				pattern: /\b\d+\s*(?:\+|-\s*\d+)?(?=\W)/,
 				alias: 'number',
 			},
 			'standard-pattern-attr': {
@@ -60,7 +60,7 @@ Prism.languages.nevod = {
 		},
 	},
 	'quantifier': {
-		pattern: /\b\d+[+-]?\d*(?=^\w|\W)/,
+		pattern: /\b\d+\s*(?:\+|-\s*\d+)?(?=\W)/,
 		alias: 'number',
 	},
 	'operator': [
